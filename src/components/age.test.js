@@ -5,7 +5,7 @@ import { secure } from '@laufire/utils/collection';
 
 // eslint-disable-next-line max-lines-per-function
 describe('Age', () => {
-	const age = getRndString();
+	const age = Number(getRndString());
 	const context = secure({
 		state: {
 			age,
@@ -18,7 +18,7 @@ describe('Age', () => {
 	test('renders the component with appropriate value', () => {
 		const component = render(Age(context)).getByRole('age');
 
-		expect(component.value).toEqual(age);
+		expect(Number(component.value)).toEqual(age);
 		expect(component).toBeInTheDocument();
 	});
 

@@ -12,7 +12,7 @@ describe('actions', () => {
 	});
 
 	test('setAge', () => {
-		const data = Symbol('data');
+		const data = 20;
 
 		const result = setAge({ data });
 

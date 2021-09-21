@@ -3,7 +3,7 @@ const setName = ({ data }) => ({
 });
 
 const setAge = ({ data }) => ({
-	age: data,
+	age: Number(data),
 });
 
 const setGender = ({ data }) => ({
