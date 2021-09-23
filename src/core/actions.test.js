@@ -3,7 +3,8 @@ import actions from './actions';
 import UserManager from '../services/userManager';
 
 describe('actions', () => {
-	const { setName, setAge, setGender, addUser } = actions;
+	const { setName, setAge, setGender,
+		addUser, resetInput, updateUsers } = actions;
 
 	test('setName', () => {
 		const data = Symbol('data');
@@ -32,17 +33,31 @@ describe('actions', () => {
 	test('addUser', () => {
 		const context = Symbol('context');
 		const returned = Symbol('returned');
-		const expectedResult = {
-			name: '',
-			age: '',
-			gender: '',
-			users: returned,
-		};
 
 		jest.spyOn(UserManager, 'add').mockReturnValue(returned);
 
 		const result = addUser(context);
 
-		expect(result).toMatchObject(expectedResult);
+		expect(result).toMatchObject({ users: returned });
+	});
+
+	test('resetInput', () => {
+		const expectedResult = {
+			name: '',
+			age: '',
+			gender: '',
+		};
+
+		const result = resetInput();
+
+		expect(result).toEqual(expectedResult);
+	});
+
+	test('updateUsers', () => {
+		const data = Symbol('data');
+
+		const result = updateUsers({ data });
+
+		expect(result).toMatchObject({ users: data });
 	});
 });

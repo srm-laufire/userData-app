@@ -42,19 +42,13 @@ describe('UserManager', () => {
 	});
 
 	test('add function concat the user in users', () => {
-		const { name, age, gender } = user;
-		const users = [user];
-		const context = {
-			state: {
-				users,
-				name,
-				age,
-				gender,
-			},
+		const state = {
+			users: [user],
 		};
+
 		const expectedLength = 2;
 
-		const result = add(context);
+		const result = add(state, user);
 
 		expect(result).toHaveLength(expectedLength);
 	});
