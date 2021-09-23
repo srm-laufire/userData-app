@@ -1,16 +1,6 @@
 const UserManager = {
-	getUser: (
-		name, age, gender
-	) => ({
-		name,
-		age,
-		gender,
-	}),
-
-	add: ({ state: { users, name, age, gender }}) =>
-		users.concat(UserManager.getUser(
-			name, age, gender
-		)),
+	add: ({ users }, user) =>
+		users.concat(user),
 
 	isEmpty: ({ state: { name, age, gender }}) =>
 		name === '' || age === '' || gender === '',

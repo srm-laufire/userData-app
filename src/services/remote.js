@@ -5,10 +5,17 @@ const Remote = {
 	fetchUsers: async () => {
 		const results = await axios.get('http://localhost:7000/');
 
-		// eslint-disable-next-line no-console
-		console.log(results);
-
 		context.actions.updateUsers(results.data);
+	},
+
+	createUser: async ({ state: { name, age, gender }}) => {
+		(name !== '' || age !== '' || gender !== '')
+			&& context.actions
+				.addUser((await axios.post('http://localhost:7000/', {
+					name,
+					age,
+					gender,
+				})).data);
 	},
 };
 

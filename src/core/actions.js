@@ -12,15 +12,18 @@ const setGender = ({ data }) => ({
 	gender: data,
 });
 
-const addUser = (context) => ({
-	name: '',
-	age: '',
-	gender: '',
-	users: UserManager.add(context),
+const addUser = ({ state, data }) => ({
+	users: UserManager.add(state, data),
 });
 
 const updateUsers = ({ data }) => ({
 	users: data,
+});
+
+const resetInput = () => ({
+	name: '',
+	age: '',
+	gender: '',
 });
 
 const actions = {
@@ -29,6 +32,7 @@ const actions = {
 	setGender,
 	addUser,
 	updateUsers,
+	resetInput,
 };
 
 export default actions;
