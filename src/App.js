@@ -1,4 +1,4 @@
-import { React } from 'react';
+import { React, useEffect } from 'react';
 import './App.scss';
 import Name from './components/name';
 import Age from './components/age';
@@ -6,11 +6,16 @@ import Gender from './components/gender';
 import context from './core/context';
 import AddButton from './components/addButton';
 import Users from './components/users';
+import Remote from './services/remote';
 
-const App = () => <div className="App" role="App">
-	Name { Name(context) } Age { Age(context) } Gender { Gender(context) }
-	{ AddButton(context) }
-	{ Users(context) }
-</div>;
+const App = () => {
+	useEffect(Remote.fetchUsers, []);
+
+	return <div className="App" role="App">
+		Name { Name(context) } Age { Age(context) } Gender { Gender(context) }
+		{ AddButton(context) }
+		{ Users(context) }
+	</div>;
+};
 
 export default App;

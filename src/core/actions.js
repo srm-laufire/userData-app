@@ -19,11 +19,16 @@ const addUser = (context) => ({
 	users: UserManager.add(context),
 });
 
+const updateUsers = ({ data }) => ({
+	users: data,
+});
+
 const actions = {
 	setName,
 	setAge,
 	setGender,
 	addUser,
+	updateUsers,
 };
 
 export default actions;

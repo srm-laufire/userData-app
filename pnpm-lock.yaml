@@ -6,6 +6,7 @@ specifiers:
   '@testing-library/jest-dom': ^5.14.1
   '@testing-library/react': ^11.2.7
   '@testing-library/user-event': ^12.8.3
+  axios: ^0.21.4
   eslint: ^7.29.0
   eslint-plugin-react: ^7.24.0
   node-sass: ^6.0.1
@@ -19,6 +20,7 @@ dependencies:
   '@testing-library/jest-dom': 5.14.1
   '@testing-library/react': 11.2.7_react-dom@17.0.2+react@17.0.2
   '@testing-library/user-event': 12.8.3
+  axios: 0.21.4
   node-sass: 6.0.1
   react: 17.0.2
   react-dom: 17.0.2_react@17.0.2
@@ -2955,6 +2957,14 @@ packages:
   /axe-core/4.2.3:
     resolution: {integrity: sha512-pXnVMfJKSIWU2Ml4JHP7pZEPIrgBO1Fd3WGx+fPBsS+KRGhE4vxooD8XBGWbQOIVSZsVK7pUDBBkCicNu80yzQ==}
     engines: {node: '>=4'}
+    dev: false
+
+  /axios/0.21.4:
+    resolution: {integrity: sha512-ut5vewkiu8jjGBdqpM44XxjuCjq9LAKeHVmoVfHVzy8eHgxxq8SbAVQNovDA8mVi05kP0Ea/n/UzcSHcTJQfNg==}
+    dependencies:
+      follow-redirects: 1.14.1_debug@4.3.1
+    transitivePeerDependencies:
+      - debug
     dev: false
 
   /axobject-query/2.2.0:
