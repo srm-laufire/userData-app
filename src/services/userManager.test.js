@@ -2,9 +2,10 @@
 import UserManager from './userManager';
 
 describe('UserManager', () => {
-	const { isEmpty, add } = UserManager;
+	const { isEmpty, add, remove } = UserManager;
 
 	const user = {
+		id: 1,
 		name: Symbol('name'),
 		age: Symbol('age'),
 		gender: Symbol('gender'),
@@ -51,5 +52,28 @@ describe('UserManager', () => {
 		const result = add(state, user);
 
 		expect(result).toHaveLength(expectedLength);
+	});
+
+	test('remove function remove the user who have same id', () => {
+		const users = [
+			user,
+			{
+				...user,
+				id: 2,
+			},
+		];
+
+		const context = {
+			state: {
+				users,
+			},
+		};
+
+		const expected = users[1];
+
+		const result = remove({ ...context, data: user });
+
+		expect(result).toEqual([expected]);
+		expect(result).toHaveLength(1);
 	});
 });

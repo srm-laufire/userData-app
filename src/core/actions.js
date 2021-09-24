@@ -26,6 +26,10 @@ const resetInput = () => ({
 	gender: '',
 });
 
+const removeUser = (context) => ({
+	users: UserManager.remove({ ...context, data: context.data }),
+});
+
 const actions = {
 	setName,
 	setAge,
@@ -33,6 +37,7 @@ const actions = {
 	addUser,
 	updateUsers,
 	resetInput,
+	removeUser,
 };
 
 export default actions;

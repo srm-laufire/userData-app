@@ -2,9 +2,11 @@
 import actions from './actions';
 import UserManager from '../services/userManager';
 
+// TODO:toHaveBeenCalled userManager
+
 describe('actions', () => {
 	const { setName, setAge, setGender,
-		addUser, resetInput, updateUsers } = actions;
+		addUser, resetInput, updateUsers, removeUser } = actions;
 
 	test('setName', () => {
 		const data = Symbol('data');
@@ -59,5 +61,21 @@ describe('actions', () => {
 		const result = updateUsers({ data });
 
 		expect(result).toMatchObject({ users: data });
+	});
+
+	test('removeUser', () => {
+		const context = {
+			data: Symbol('data'),
+		};
+
+		const returned = Symbol('returned');
+
+		jest.spyOn(UserManager, 'remove').mockReturnValue(returned);
+
+		const result = removeUser(context);
+
+		expect(result).toMatchObject({ users: returned });
+		expect(UserManager.remove)
+			.toHaveBeenCalledWith({ ...context, data: context.data });
 	});
 });
