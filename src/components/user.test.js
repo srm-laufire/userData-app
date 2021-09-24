@@ -20,11 +20,11 @@ describe('User', () => {
 		const component = getByRole('user');
 
 		expect(component).toBeInTheDocument();
-		expect(getByRole('name')).toBeInTheDocument();
+		expect(component).toHaveTextContent(user.name);
+		expect(component).toHaveTextContent(user.age);
+		expect(component).toHaveTextContent(user.gender);
 		expect(getByRole('name')).toHaveClass('user-style');
-		expect(getByRole('age')).toBeInTheDocument();
 		expect(getByRole('age')).toHaveClass('user-style');
-		expect(getByRole('gender')).toBeInTheDocument();
 		expect(getByRole('gender')).toHaveClass('user-style');
 		expect(removeBotton).toHaveBeenCalledWith(user);
 	});
