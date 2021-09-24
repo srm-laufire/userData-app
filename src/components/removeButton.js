@@ -1,10 +1,10 @@
 import { React } from 'react';
-import context from '../core/context';
+import Remote from '../services/remote';
 
 const RemoveButton = (user) =>
 	<button
 		role="removeButton"
-		onClick={ () => context.actions.removeUser(user) }
+		onClick={ () => Remote.removeUser(user) }
 	>X</button>;
 
 export default RemoveButton;

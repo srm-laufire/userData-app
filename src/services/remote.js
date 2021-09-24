@@ -17,6 +17,12 @@ const Remote = {
 					gender,
 				})).data);
 	},
+
+	removeUser: async (user) => {
+		const result = await axios.delete(`http://localhost:7000/${ user.id }`);
+
+		result && context.actions.removeUser(user);
+	},
 };
 
 export default Remote;

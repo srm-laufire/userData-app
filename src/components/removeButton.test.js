@@ -1,7 +1,6 @@
 
-jest.mock('../core/context', () => ({ actions: { removeUser: jest.fn() }}));
 import { render, fireEvent } from '@testing-library/react';
-import context from '../core/context';
+import Remote from '../services/remote';
 import RemoveButton from './removeButton';
 
 // eslint-disable-next-line max-lines-per-function
@@ -15,11 +14,12 @@ describe('RemoveButton', () => {
 	});
 
 	test('when clicked triggers the action, removeUser', () => {
+		jest.spyOn(Remote, 'removeUser');
 		const component = render(RemoveButton(user))
 			.getByRole('removeButton');
 
 		fireEvent.click(component);
 
-		expect(context.actions.removeUser).toHaveBeenCalledWith(user);
+		expect(Remote.removeUser).toHaveBeenCalledWith(user);
 	});
 });
