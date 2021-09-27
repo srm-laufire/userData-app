@@ -87,6 +87,5 @@ describe('UserManager', () => {
 		const result = remove({ ...context, data: user });
 
 		expect(result).toEqual([expected]);
-		expect(result).toHaveLength(1);
 	});
 });

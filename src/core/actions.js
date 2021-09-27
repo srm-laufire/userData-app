@@ -27,7 +27,7 @@ const resetInput = () => ({
 });
 
 const removeUser = (context) => ({
-	users: UserManager.remove({ ...context, data: context.data }),
+	users: UserManager.remove(context),
 });
 
 const actions = {

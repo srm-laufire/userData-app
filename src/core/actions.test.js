@@ -76,6 +76,6 @@ describe('actions', () => {
 
 		expect(result).toMatchObject({ users: returned });
 		expect(UserManager.remove)
-			.toHaveBeenCalledWith({ ...context, data: context.data });
+			.toHaveBeenCalledWith(context);
 	});
 });
