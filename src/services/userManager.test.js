@@ -1,5 +1,6 @@
 /* eslint-disable max-lines-per-function */
 import UserManager from './userManager';
+import { map } from '@laufire/utils/collection';
 
 describe('UserManager', () => {
 	const { isEmpty, add, remove } = UserManager;
@@ -12,34 +13,46 @@ describe('UserManager', () => {
 	};
 
 	describe('isEmpty', () => {
-		test('isEmpty returns true, if the data is empty string', () => {
-			const context = {
-				state: {
-					name: '',
-					age: '',
-					gender: '',
-				},
-			};
-
-			const result = isEmpty(context);
-
-			expect(result).toEqual(true);
-		});
-
-		test('isEmpty returns false, if the data is present', () => {
-			const { name, age, gender } = user;
+		const generateTest = ({ name, age, expected }) => {
 			const context = {
 				state: {
 					name,
 					age,
-					gender,
 				},
 			};
 
 			const result = isEmpty(context);
 
-			expect(result).toEqual(false);
-		});
+			expect(result).toEqual(expected);
+		};
+		const combinations = {
+			nameEmpty: {
+				name: '',
+				age: Symbol('age'),
+				expected: true,
+			},
+
+			ageEmpty: {
+				name: Symbol('name'),
+				age: '',
+				expected: true,
+			},
+
+			allEmpty: {
+				name: '',
+				age: '',
+				expected: true,
+			},
+
+			noEmpty: {
+				name: Symbol('name'),
+				age: Symbol('age'),
+				expected: false,
+			},
+		};
+
+		map(combinations, (params, action) =>
+			test(action, () => generateTest(params)));
 	});
 
 	test('add function concat the user in users', () => {

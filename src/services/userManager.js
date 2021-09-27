@@ -5,8 +5,8 @@ const UserManager = {
 	remove: ({ state: { users }, data: current }) =>
 		users.filter((user) => user.id !== current.id),
 
-	isEmpty: ({ state: { name, age, gender }}) =>
-		name === '' || age === '' || gender === '',
+	isEmpty: ({ state: { name, age }}) =>
+		name === '' || age === '',
 };
 
 export default UserManager;
