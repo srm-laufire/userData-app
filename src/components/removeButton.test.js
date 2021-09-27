@@ -7,14 +7,15 @@ import RemoveButton from './removeButton';
 describe('RemoveButton', () => {
 	const user = Symbol('user');
 
-	test('renders the component with appropriate component', () => {
+	test('renders the appropriate component', () => {
 		const component = render(RemoveButton(user)).getByRole('removeButton');
 
 		expect(component).toBeInTheDocument();
 	});
 
 	test('when clicked triggers the action, removeUser', () => {
-		jest.spyOn(Remote, 'removeUser');
+		jest.spyOn(Remote, 'removeUser').mockReturnValue();
+
 		const component = render(RemoveButton(user))
 			.getByRole('removeButton');
 

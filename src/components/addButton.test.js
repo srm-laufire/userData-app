@@ -16,7 +16,7 @@ describe('AddButton', () => {
 		},
 	};
 
-	test('renders the component with appropriate component', () => {
+	test('renders the appropriate component', () => {
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		expect(component).toBeInTheDocument();

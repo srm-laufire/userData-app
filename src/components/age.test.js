@@ -24,7 +24,7 @@ describe('Age', () => {
 		expect(component).toBeInTheDocument();
 	});
 
-	test('when the input value is change, triggers the action setAge', () => {
+	test('action.setAge is triggered, when the input value is changed', () => {
 		const value = getRndString();
 
 		const component = render(Age(context)).getByRole('age');

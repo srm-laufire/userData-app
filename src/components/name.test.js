@@ -15,14 +15,14 @@ describe('Name', () => {
 		},
 	});
 
-	test('renders the component with appropriate class', () => {
+	test('renders the component with appropriate value', () => {
 		const component = render(Name(context)).getByRole('name');
 
 		expect(component.value).toEqual(name);
 		expect(component).toBeInTheDocument();
 	});
 
-	test('when the input value is change, triggers the action setName', () => {
+	test('action.setName is triggered, when the input value is changed', () => {
 		const value = getRndString();
 
 		const component = render(Name(context)).getByRole('name');

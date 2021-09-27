@@ -17,7 +17,7 @@ describe('Users', () => {
 		expect(component).toBeInTheDocument();
 	});
 
-	test('', () => {
+	test('Validate whether the users are passed', () => {
 		const returnValue = <div role="mock"/>;
 
 		jest.spyOn(users, 'map').mockReturnValue(returnValue);
