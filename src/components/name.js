@@ -1,14 +1,5 @@
-import { React } from 'react';
+import genInput from './genInput';
 
-const Name = (context) => {
-	const { state: { name }} = context;
-
-	return (
-		<input
-			value={ name }
-			role="name"
-			onChange={ (evt) => context.actions.setName(evt.target.value) }
-		/>);
-};
+const Name = genInput('name');
 
 export default Name;

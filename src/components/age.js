@@ -1,14 +1,5 @@
-import { React } from 'react';
+import genInput from './genInput';
 
-const Age = (context) => {
-	const { state: { age }} = context;
-
-	return (
-		<input
-			value={ age }
-			role="age"
-			onChange={ (evt) => context.actions.setAge(evt.target.value) }
-		/>);
-};
+const Age = genInput('age');
 
 export default Age;
