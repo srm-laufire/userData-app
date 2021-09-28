@@ -1,5 +1,5 @@
 const UserManager = {
-	add: ({ users }, user) =>
+	add: ({ state: { users }, data: user }) =>
 		users.concat(user),
 
 	remove: ({ state: { users }, data: current }) =>

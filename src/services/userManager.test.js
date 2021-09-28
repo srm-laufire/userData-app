@@ -56,13 +56,16 @@ describe('UserManager', () => {
 	});
 
 	test('add function concat the user in users', () => {
-		const state = {
-			users: [user],
+		const context = {
+			state: {
+				users: [user],
+			},
+			data: user,
 		};
 
 		const expectedLength = 2;
 
-		const result = add(state, user);
+		const result = add(context);
 
 		expect(result).toHaveLength(expectedLength);
 	});
@@ -80,11 +83,12 @@ describe('UserManager', () => {
 			state: {
 				users,
 			},
+			data: user,
 		};
 
 		const expected = users[1];
 
-		const result = remove({ ...context, data: user });
+		const result = remove(context);
 
 		expect(result).toEqual([expected]);
 	});

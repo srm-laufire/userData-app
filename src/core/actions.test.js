@@ -2,8 +2,6 @@
 import actions from './actions';
 import UserManager from '../services/userManager';
 
-// TODO:toHaveBeenCalled userManager
-
 describe('actions', () => {
 	const { setName, setAge, setGender,
 		addUser, resetInput, updateUsers, removeUser } = actions;
@@ -41,6 +39,7 @@ describe('actions', () => {
 		const result = addUser(context);
 
 		expect(result).toMatchObject({ users: returned });
+		expect(UserManager.add).toHaveBeenCalledWith(context);
 	});
 
 	test('resetInput', () => {
@@ -64,9 +63,7 @@ describe('actions', () => {
 	});
 
 	test('removeUser', () => {
-		const context = {
-			data: Symbol('data'),
-		};
+		const context = Symbol('context');
 
 		const returned = Symbol('returned');
 

@@ -12,8 +12,8 @@ const setGender = ({ data }) => ({
 	gender: data,
 });
 
-const addUser = ({ state, data }) => ({
-	users: UserManager.add(state, data),
+const addUser = (context) => ({
+	users: UserManager.add(context),
 });
 
 const updateUsers = ({ data }) => ({
