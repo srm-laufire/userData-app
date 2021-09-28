@@ -10,12 +10,11 @@ import { render } from '@testing-library/react';
 import App from './App';
 
 test('renders learn react link', () => {
+	const components = ['name', 'age', 'gender', 'addButton', 'users'];
 	const { getByRole } = render(<App/>);
 
-	expect(getByRole('name')).toBeInTheDocument();
-	expect(getByRole('age')).toBeInTheDocument();
-	expect(getByRole('gender')).toBeInTheDocument();
-	expect(getByRole('addButton')).toBeInTheDocument();
-	expect(getByRole('users')).toBeInTheDocument();
+	components.forEach((component) => {
+		expect(getByRole(component)).toBeInTheDocument();
+	});
 	expect(getByRole('App')).toHaveClass('App');
 });
