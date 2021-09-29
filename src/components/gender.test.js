@@ -4,7 +4,7 @@ import { secure } from '@laufire/utils/collection';
 import { rndValue } from '@laufire/utils/random';
 import { React } from 'react';
 import config from '../core/config';
-import Options from './options';
+import Option from './option';
 
 // eslint-disable-next-line max-lines-per-function
 describe('Gender', () => {
@@ -46,6 +46,6 @@ describe('Gender', () => {
 		const component = render(Gender(context)).getByRole('mock');
 
 		expect(component).toBeInTheDocument();
-		expect(genderOptions.map).toHaveBeenCalledWith(Options);
+		expect(genderOptions.map).toHaveBeenCalledWith(Option);
 	});
 });

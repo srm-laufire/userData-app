@@ -1,5 +1,5 @@
 import { React } from 'react';
-import Options from './options';
+import Option from './option';
 import config from '../core/config';
 
 const Gender = (context) => {
@@ -12,7 +12,7 @@ const Gender = (context) => {
 			role="gender"
 			onChange={ (evt) => context.actions.setGender(evt.target.value) }
 		>
-			{ genderOptions.map(Options) }
+			{ genderOptions.map(Option) }
 		</select>);
 };
 
