@@ -1,17 +1,60 @@
 /* eslint-disable max-lines-per-function */
 import actions from './actions';
 import UserManager from '../services/userManager';
+import { map } from '@laufire/utils/collection';
 
+// eslint-disable-next-line max-statements
 describe('actions', () => {
-	const { setName, setAge, setGender,
-		addUser, resetInput, updateUsers, removeUser } = actions;
+	const context = Symbol('context');
+	const returned = Symbol('returned');
+	const { setName, setAge, setGender, resetInput, updateUsers } = actions;
 
-	test('setName', () => {
+	describe('proxies', () => {
+		const testProxy = ({ mock, impactedKey, action }) => {
+			const { library, func } = mock;
+
+			jest.spyOn(library, func).mockReturnValue(returned);
+
+			const result = actions[action](context);
+
+			expect(result).toMatchObject({ [impactedKey]: returned });
+			expect(UserManager[func]).toHaveBeenCalledWith(context);
+		};
+		const proxies = {
+			addUser: {
+				mock: {
+					library: UserManager,
+					func: 'add',
+				},
+				impactedKey: 'users',
+			},
+			removeUser: {
+				mock: {
+					library: UserManager,
+					func: 'remove',
+				},
+				impactedKey: 'users',
+			},
+		};
+
+		map(proxies, (params, action) =>
+			test(action, () => testProxy({ ...params, action })));
+	});
+
+	const combinations = [
+		['setName', setName, 'name'],
+		['setGender', setGender, 'gender'],
+		['updateUsers', updateUsers, 'users'],
+	];
+
+	test.each(combinations)('%p', (
+		dummy, action, impactedKey
+	) => {
 		const data = Symbol('data');
 
-		const result = setName({ data });
+		const result = action({ data });
 
-		expect(result).toMatchObject({ name: data });
+		expect(result).toMatchObject({ [impactedKey]: data });
 	});
 
 	test('setAge', () => {
@@ -20,26 +63,6 @@ describe('actions', () => {
 		const result = setAge({ data });
 
 		expect(result).toMatchObject({ age: data });
-	});
-
-	test('setGender', () => {
-		const data = Symbol('data');
-
-		const result = setGender({ data });
-
-		expect(result).toMatchObject({ gender: data });
-	});
-
-	test('addUser', () => {
-		const context = Symbol('context');
-		const returned = Symbol('returned');
-
-		jest.spyOn(UserManager, 'add').mockReturnValue(returned);
-
-		const result = addUser(context);
-
-		expect(result).toMatchObject({ users: returned });
-		expect(UserManager.add).toHaveBeenCalledWith(context);
 	});
 
 	test('resetInput', () => {
@@ -52,27 +75,5 @@ describe('actions', () => {
 		const result = resetInput();
 
 		expect(result).toEqual(expectedResult);
-	});
-
-	test('updateUsers', () => {
-		const data = Symbol('data');
-
-		const result = updateUsers({ data });
-
-		expect(result).toMatchObject({ users: data });
-	});
-
-	test('removeUser', () => {
-		const context = Symbol('context');
-
-		const returned = Symbol('returned');
-
-		jest.spyOn(UserManager, 'remove').mockReturnValue(returned);
-
-		const result = removeUser(context);
-
-		expect(result).toMatchObject({ users: returned });
-		expect(UserManager.remove)
-			.toHaveBeenCalledWith(context);
 	});
 });
