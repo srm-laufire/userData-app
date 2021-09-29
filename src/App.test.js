@@ -1,6 +1,6 @@
 /* eslint-disable react/display-name */
-jest.mock('./components/name', () => () => <div role="name"/>);
-jest.mock('./components/age', () => () => <div role="age"/>);
+jest.mock('./components/genInput',
+	() => (value) => () => <div role={ value }/>);
 jest.mock('./components/gender', () => () => <div role="gender"/>);
 jest.mock('./components/addButton', () => () => <div role="addButton"/>);
 jest.mock('./components/users', () => () => <div role="users"/>);
