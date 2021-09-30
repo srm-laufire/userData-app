@@ -1,5 +1,6 @@
 import { React } from 'react';
 import UserManager from '../services/userManager';
+import Remote from '../services/remote';
 
 const AddButton = (context) => {
 	const { isEmpty } = UserManager;
@@ -9,7 +10,7 @@ const AddButton = (context) => {
 			role="addButton"
 			disabled={ isEmpty(context) }
 			onClick={ () => {
-				UserManager.remoteCall(context);
+				Remote.createUser(context);
 				context.actions.resetInput();
 			} }
 		>Add

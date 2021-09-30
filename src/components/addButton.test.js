@@ -1,6 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
 import AddButton from './addButton';
 import UserManager from '../services/userManager';
+import Remote from '../services/remote';
 
 // eslint-disable-next-line max-lines-per-function
 // TODO: Check text content.
@@ -44,13 +45,13 @@ describe('AddButton', () => {
 	});
 
 	test('when clicked triggers the action, addUser', () => {
-		jest.spyOn(UserManager, 'remoteCall').mockReturnValue();
+		jest.spyOn(Remote, 'createUser').mockReturnValue();
 
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		fireEvent.click(component);
 
 		expect(context.actions.resetInput).toHaveBeenCalled();
-		expect(UserManager.remoteCall).toHaveBeenCalledWith(context);
+		expect(Remote.createUser).toHaveBeenCalledWith(context);
 	});
 });
