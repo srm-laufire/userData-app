@@ -1,6 +1,7 @@
 import Remote from './remote';
 import context from '../core/context';
 import axios from 'axios';
+import config from '../core/config';
 
 test('fetchUsers', async () => {
 	const { actions } = context;
@@ -11,11 +12,9 @@ test('fetchUsers', async () => {
 	jest.spyOn(axios, 'get').mockReturnValue(results);
 	jest.spyOn(actions, 'updateUsers');
 
-	const result = await Remote.fetchUsers();
+	await Remote.fetchUsers();
 
-	// TODO: Remove the unnecessary test case.
-	expect(result).toBeUndefined();
-	expect(axios.get).toHaveBeenCalledWith('http://localhost:7000/');
+	expect(axios.get).toHaveBeenCalledWith(config.localHostURL);
 	expect(actions.updateUsers).toHaveBeenCalledWith(results.data);
 });
 
@@ -27,8 +26,6 @@ test('createUser', async () => {
 		age: Symbol('age'),
 		gender: Symbol('gender'),
 	};
-	// TODO: Move the declarations above the dictionary above.
-	const { name, age, gender } = state;
 	const results = {
 		data: Symbol('data'),
 	};
@@ -36,33 +33,28 @@ test('createUser', async () => {
 	jest.spyOn(axios, 'post').mockReturnValue(results);
 	jest.spyOn(actions, 'addUser').mockReturnValue();
 
-	const result = await Remote.createUser({ state });
+	await Remote.createUser({ state });
 
-	expect(result).toBeUndefined();
-	expect(axios.post).toHaveBeenCalledWith('http://localhost:7000/', {
-		// TODO: Combine the params into a single dictionary.
-		name,
-		age,
-		gender,
-	});
+	expect(axios.post).toHaveBeenCalledWith(config.localHostURL, state);
 	expect(actions.addUser).toHaveBeenCalledWith(results.data);
 });
 
-test('removeUser', async () => {
+test('removeUser', () => {
 	const { actions } = context;
 	const user = {
 		id: 1,
 	};
+	const expectations = [true, false];
 
-	// TODO: Test for failure case.
-	jest.spyOn(axios, 'delete').mockReturnValue(true);
-	jest.spyOn(actions, 'removeUser').mockReturnValue();
+	expectations.forEach(async (returned) => {
+		jest.spyOn(axios, 'delete').mockReturnValue(returned);
+		jest.spyOn(actions, 'removeUser').mockReturnValue();
 
-	const result = await Remote.removeUser(user);
+		await Remote.removeUser(user);
 
-	expect(result).toBeUndefined();
-	expect(axios.delete)
-		.toHaveBeenCalledWith(`http://localhost:7000/${ user.id }`);
-	expect(actions.removeUser)
-		.toHaveBeenCalledWith(user);
+		expect(axios.delete)
+			.toHaveBeenCalledWith(`${ config.localHostURL }${ user.id }`);
+		returned && expect(actions.removeUser)
+			.toHaveBeenCalledWith(user);
+	});
 });

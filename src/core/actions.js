@@ -21,11 +21,9 @@ const updateUsers = ({ data }) => ({
 	users: data,
 });
 
-// TODO: The reet values should be from seed. IE: gender cannot be an empty string.
 const resetInput = () => ({
 	name: '',
 	age: '',
-	gender: '',
 });
 
 const removeUser = (context) => ({

@@ -1,17 +1,17 @@
 import axios from 'axios';
+import config from '../core/config';
 import context from '../core/context';
 
 const Remote = {
 	fetchUsers: async () => {
-		// TODO: Get the baseURL from config.
-		const results = await axios.get('http://localhost:7000/');
+		const results = await axios.get(config.localHostURL);
 
 		context.actions.updateUsers(results.data);
 	},
 
 	createUser: async ({ state: { name, age, gender }}) => {
 		context.actions
-			.addUser((await axios.post('http://localhost:7000/', {
+			.addUser((await axios.post(config.localHostURL, {
 				name,
 				age,
 				gender,
@@ -19,7 +19,7 @@ const Remote = {
 	},
 
 	removeUser: async (user) => {
-		const result = await axios.delete(`http://localhost:7000/${ user.id }`);
+		const result = await axios.delete(`${ config.localHostURL }${ user.id }`);
 
 		result && context.actions.removeUser(user);
 	},

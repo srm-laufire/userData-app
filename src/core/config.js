@@ -3,6 +3,7 @@ const config = {
 		'Male',
 		'Female',
 	],
+	localHostURL: 'http://localhost:7000/',
 };
 
 export default config;
