@@ -26,27 +26,14 @@ describe('UserManager', () => {
 			expect(result).toEqual(expected);
 		};
 
-		// TODO: Only two case are needed "some empty" and "all full".
 		const combinations = {
-			nameEmpty: {
+			someEmpty: {
 				name: '',
 				age: Symbol('age'),
 				expected: true,
 			},
 
-			ageEmpty: {
-				name: Symbol('name'),
-				age: '',
-				expected: true,
-			},
-
-			allEmpty: {
-				name: '',
-				age: '',
-				expected: true,
-			},
-
-			noEmpty: {
+			allFull: {
 				name: Symbol('name'),
 				age: Symbol('age'),
 				expected: false,
@@ -65,12 +52,11 @@ describe('UserManager', () => {
 			data: user,
 		};
 
-		const expectedLength = 2;
+		const expected = [user, user];
 
 		const result = add(context);
 
-		// TODO: Test the content instead of just the length.
-		expect(result).toHaveLength(expectedLength);
+		expect(result).toEqual(expected);
 	});
 
 	test('remove function remove the user who have same id', () => {
