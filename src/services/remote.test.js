@@ -10,12 +10,12 @@ test('fetchUsers', async () => {
 	};
 
 	jest.spyOn(axios, 'get').mockReturnValue(results);
-	jest.spyOn(actions, 'updateUsers');
+	jest.spyOn(actions, 'setUsers');
 
 	await Remote.fetchUsers();
 
 	expect(axios.get).toHaveBeenCalledWith(config.localHostURL);
-	expect(actions.updateUsers).toHaveBeenCalledWith(results.data);
+	expect(actions.setUsers).toHaveBeenCalledWith(results.data);
 });
 
 // eslint-disable-next-line max-lines-per-function

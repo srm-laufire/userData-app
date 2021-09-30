@@ -16,8 +16,7 @@ const addUser = (context) => ({
 	users: UserManager.add(context),
 });
 
-// TODO: Rename this to setUsers.
-const updateUsers = ({ data }) => ({
+const setUsers = ({ data }) => ({
 	users: data,
 });
 
@@ -35,7 +34,7 @@ const actions = {
 	setAge,
 	setGender,
 	addUser,
-	updateUsers,
+	setUsers,
 	resetInput,
 	removeUser,
 };

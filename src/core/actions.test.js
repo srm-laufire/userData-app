@@ -47,7 +47,7 @@ describe('actions', () => {
 		['setGender', 'gender', Symbol('data')],
 		// eslint-disable-next-line no-magic-numbers
 		['setAge', 'age', rndBetween(0, 9)],
-		['updateUsers', 'users', Symbol('data')],
+		['setUsers', 'users', Symbol('data')],
 	];
 
 	test.each(combinations)('%p', (

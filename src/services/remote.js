@@ -6,7 +6,7 @@ const Remote = {
 	fetchUsers: async () => {
 		const results = await axios.get(config.localHostURL);
 
-		context.actions.updateUsers(results.data);
+		context.actions.setUsers(results.data);
 	},
 
 	createUser: async ({ state: { name, age, gender }}) => {
