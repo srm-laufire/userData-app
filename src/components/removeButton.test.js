@@ -5,7 +5,7 @@ import RemoveButton from './removeButton';
 
 // eslint-disable-next-line max-lines-per-function
 describe('RemoveButton', () => {
-	//TODO: Test for textContent.
+	// TODO: Test for textContent.
 	const user = Symbol('user');
 
 	test('renders the appropriate component', () => {

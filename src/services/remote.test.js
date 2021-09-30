@@ -13,7 +13,7 @@ test('fetchUsers', async () => {
 
 	const result = await Remote.fetchUsers();
 
-	//TODO: Remove the unnecessary test case.
+	// TODO: Remove the unnecessary test case.
 	expect(result).toBeUndefined();
 	expect(axios.get).toHaveBeenCalledWith('http://localhost:7000/');
 	expect(actions.updateUsers).toHaveBeenCalledWith(results.data);
@@ -27,7 +27,7 @@ test('createUser', async () => {
 		age: Symbol('age'),
 		gender: Symbol('gender'),
 	};
-	//TODO: Move the declarations above the dictionary above.
+	// TODO: Move the declarations above the dictionary above.
 	const { name, age, gender } = state;
 	const results = {
 		data: Symbol('data'),
@@ -40,7 +40,7 @@ test('createUser', async () => {
 
 	expect(result).toBeUndefined();
 	expect(axios.post).toHaveBeenCalledWith('http://localhost:7000/', {
-		//TODO: Combine the params into a single dictionary.
+		// TODO: Combine the params into a single dictionary.
 		name,
 		age,
 		gender,
@@ -54,7 +54,7 @@ test('removeUser', async () => {
 		id: 1,
 	};
 
-	//TODO: Test for failure case.
+	// TODO: Test for failure case.
 	jest.spyOn(axios, 'delete').mockReturnValue(true);
 	jest.spyOn(actions, 'removeUser').mockReturnValue();
 

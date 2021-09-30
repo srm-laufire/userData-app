@@ -9,7 +9,7 @@ test('renders the component with appropriate value', () => {
 
 	const component = render(Option(gender)).getByRole('option');
 
-	//TODO: Test for the attribute, key.
+	// TODO: Test for the attribute, key.
 	expect(component).toBeInTheDocument();
 	expect(component.value).toEqual(gender);
 	expect(component).toHaveTextContent(gender);

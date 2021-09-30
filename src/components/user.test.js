@@ -13,7 +13,7 @@ describe('User', () => {
 		gender: getRndString(),
 	};
 
-	//TODO: Fix the description.
+	// TODO: Fix the description.
 	test('User returns name, age, gender', () => {
 		const removeButton = jest.spyOn(RemoveButton, 'default')
 			.mockReturnValue(<span role="removeButton"/>);
