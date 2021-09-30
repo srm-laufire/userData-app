@@ -14,6 +14,7 @@ describe('UserManager', () => {
 	};
 
 	describe('isEmpty', () => {
+		//NOTE: Good one :)
 		const generateTest = ({ name, age, expected }) => {
 			const context = {
 				state: {
@@ -26,6 +27,8 @@ describe('UserManager', () => {
 
 			expect(result).toEqual(expected);
 		};
+
+		//TODO: Only two case are needed "some empty" and "all full".
 		const combinations = {
 			nameEmpty: {
 				name: '',
@@ -68,6 +71,7 @@ describe('UserManager', () => {
 
 		const result = add(context);
 
+		//TODO: Test the content instead of just the length.
 		expect(result).toHaveLength(expectedLength);
 	});
 

@@ -42,6 +42,7 @@ describe('actions', () => {
 	});
 
 	const combinations = [
+		//TODO: Remove the unnecessary values at [1].
 		['setName', setName, 'name'],
 		['setGender', setGender, 'gender'],
 		['updateUsers', updateUsers, 'users'],
@@ -57,6 +58,7 @@ describe('actions', () => {
 		expect(result).toMatchObject({ [impactedKey]: data });
 	});
 
+	//TODO: Combine this with the tests above.
 	test('setAge', () => {
 		const data = 20;
 

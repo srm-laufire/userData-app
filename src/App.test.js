@@ -1,4 +1,5 @@
 /* eslint-disable react/display-name */
+//NOTE: Good one :)
 jest.mock('./components/genInput',
 	() => (value) => () => <div role={ value }/>);
 jest.mock('./components/gender', () => () => <div role="gender"/>);
@@ -9,6 +10,7 @@ import { React } from 'react';
 import { render } from '@testing-library/react';
 import App from './App';
 
+//TODO: Fix the description.
 test('renders learn react link', () => {
 	const components = ['name', 'age', 'gender', 'addButton', 'users'];
 	const { getByRole } = render(<App/>);

@@ -23,6 +23,7 @@ describe('genInput', () => {
 	};
 
 	test.each(expectations)('renders the component %p with appropriate value',
+		//TODO: Rename param as type.
 		(param, paramValue) => {
 			const context = secure({
 				state: {
@@ -30,6 +31,7 @@ describe('genInput', () => {
 				},
 			});
 
+			//TODO: Rename the constant as Input.
 			const Result = genInput(param);
 			const component = render(Result(context)).getByRole(param);
 
@@ -41,6 +43,7 @@ describe('genInput', () => {
 		+ 'when the input value is changed',
 	(param, paramValue) => {
 		const value = getRndString();
+		//TODO: Remove the unnecessary dictionary.
 		const actionNames = {
 			name: 'setName',
 			age: 'setAge',

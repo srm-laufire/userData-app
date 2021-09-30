@@ -3,6 +3,7 @@ import context from '../core/context';
 
 const Remote = {
 	fetchUsers: async () => {
+		//TODO: Get the baseURL from config.
 		const results = await axios.get('http://localhost:7000/');
 
 		context.actions.updateUsers(results.data);
