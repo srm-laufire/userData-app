@@ -13,8 +13,7 @@ describe('User', () => {
 		gender: getRndString(),
 	};
 
-	// TODO: Fix the description.
-	test('User returns name, age, gender', () => {
+	test('renders the appropriate component', () => {
 		const removeButton = jest.spyOn(RemoveButton, 'default')
 			.mockReturnValue(<span role="removeButton"/>);
 

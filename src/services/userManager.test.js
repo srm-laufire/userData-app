@@ -13,7 +13,6 @@ describe('UserManager', () => {
 	};
 
 	describe('isEmpty', () => {
-		// NOTE: Good one :)
 		const generateTest = ({ name, age, expected }) => {
 			const context = {
 				state: {

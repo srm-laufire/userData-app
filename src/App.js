@@ -8,7 +8,6 @@ import Remote from './services/remote';
 import genInput from './components/genInput';
 
 const App = () => {
-	// TODO: Forgot to reset?
 	useEffect(Remote.fetchUsers, []);
 
 	return <div className="App" role="App">
