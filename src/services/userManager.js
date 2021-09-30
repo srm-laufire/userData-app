@@ -1,3 +1,5 @@
+import Remote from '../services/remote';
+
 const UserManager = {
 	add: ({ state: { users }, data: user }) =>
 		users.concat(user),
@@ -7,6 +9,9 @@ const UserManager = {
 
 	isEmpty: ({ state: { name, age }}) =>
 		name === '' || age === '',
+
+	remoteCall: (context) =>
+		UserManager.isEmpty(context) && Remote.createUser(context),
 };
 
 export default UserManager;

@@ -9,13 +9,12 @@ const Remote = {
 	},
 
 	createUser: async ({ state: { name, age, gender }}) => {
-		(name !== '' || age !== '' || gender !== '')
-			&& context.actions
-				.addUser((await axios.post('http://localhost:7000/', {
-					name,
-					age,
-					gender,
-				})).data);
+		context.actions
+			.addUser((await axios.post('http://localhost:7000/', {
+				name,
+				age,
+				gender,
+			})).data);
 	},
 
 	removeUser: async (user) => {

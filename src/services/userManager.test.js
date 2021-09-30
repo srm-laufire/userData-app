@@ -1,9 +1,10 @@
 /* eslint-disable max-lines-per-function */
 import UserManager from './userManager';
 import { map } from '@laufire/utils/collection';
+import Remote from './remote';
 
 describe('UserManager', () => {
-	const { isEmpty, add, remove } = UserManager;
+	const { isEmpty, add, remove, remoteCall } = UserManager;
 
 	const user = {
 		id: 1,
@@ -91,5 +92,26 @@ describe('UserManager', () => {
 		const result = remove(context);
 
 		expect(result).toEqual([expected]);
+	});
+
+	const expectations = [
+		['called', true, Symbol('user')],
+		['did not call', false, false],
+	];
+
+	test.each(expectations)('%p the create user function in remote,'
+	+ ' when the isEmpty returns %p', async (
+		dummy, returned, expected
+	) => {
+		const context = Symbol('context');
+
+		jest.spyOn(UserManager, 'isEmpty').mockReturnValue(returned);
+		jest.spyOn(Remote, 'createUser').mockReturnValue(expected);
+
+		const result = await remoteCall(context);
+
+		expect(result).toEqual(expected);
+		expect(UserManager.isEmpty).toHaveBeenCalledWith(context);
+		returned && expect(Remote.createUser).toHaveBeenCalledWith(context);
 	});
 });

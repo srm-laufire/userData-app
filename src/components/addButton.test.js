@@ -1,7 +1,6 @@
 import { render, fireEvent } from '@testing-library/react';
 import AddButton from './addButton';
 import UserManager from '../services/userManager';
-import Remote from '../services/remote';
 
 // eslint-disable-next-line max-lines-per-function
 describe('AddButton', () => {
@@ -39,13 +38,13 @@ describe('AddButton', () => {
 	});
 
 	test('when clicked triggers the action, addUser', () => {
-		jest.spyOn(Remote, 'createUser');
+		jest.spyOn(UserManager, 'remoteCall').mockReturnValue();
 
 		const component = render(AddButton(context)).getByRole('addButton');
 
 		fireEvent.click(component);
 
 		expect(context.actions.resetInput).toHaveBeenCalled();
-		expect(Remote.createUser).toHaveBeenCalledWith(context);
+		expect(UserManager.remoteCall).toHaveBeenCalledWith(context);
 	});
 });
