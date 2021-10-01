@@ -10,8 +10,8 @@ describe('genInput', () => {
 	// eslint-disable-next-line no-magic-numbers
 	const age = String(rndBetween(0, 9));
 	const expectations = [
-		['name', name],
-		['age', age],
+		['setName', 'name', name],
+		['setAge', 'age', age],
 	];
 	const mockActions = {
 		name: {
@@ -23,32 +23,28 @@ describe('genInput', () => {
 	};
 
 	test.each(expectations)('renders the component %p with appropriate value',
-		//TODO: Rename param as type.
-		(param, paramValue) => {
+		(
+			dummy, type, value
+		) => {
 			const context = secure({
 				state: {
-					[param]: paramValue,
+					[type]: value,
 				},
 			});
 
-			//TODO: Rename the constant as Input.
-			const Result = genInput(param);
-			const component = render(Result(context)).getByRole(param);
+			const Input = genInput(type);
+			const component = render(Input(context)).getByRole(type);
 
 			expect(component).toBeInTheDocument();
-			expect(component.value).toEqual(paramValue);
+			expect(component.value).toEqual(value);
 		});
 
 	test.each(expectations)('required action for %p is triggered,'
 		+ 'when the input value is changed',
-	(param, paramValue) => {
+	(
+		action, param, paramValue
+	) => {
 		const value = getRndString();
-		//TODO: Remove the unnecessary dictionary.
-		const actionNames = {
-			name: 'setName',
-			age: 'setAge',
-		};
-
 		const context = secure({
 			state: {
 				[param]: paramValue,
@@ -61,7 +57,7 @@ describe('genInput', () => {
 
 		fireEvent.change(component, { target: { value }});
 
-		expect(context.actions[actionNames[param]])
+		expect(context.actions[action])
 			.toHaveBeenCalledWith(value);
 	});
 });

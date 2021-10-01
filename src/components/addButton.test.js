@@ -4,48 +4,39 @@ import UserManager from '../services/userManager';
 import Remote from '../services/remote';
 
 // eslint-disable-next-line max-lines-per-function
-// TODO: Check text content.
-// eslint-disable-next-line max-lines-per-function
 describe('AddButton', () => {
 	const context = {
-		state: {
-			// TODO: Remove unnecessary keys.
-			name: Symbol('name'),
-			age: Symbol('age'),
-			gender: Symbol('gender'),
-		},
 		actions: {
 			resetInput: jest.fn(),
 		},
 	};
 
 	test('renders the appropriate component', () => {
-		const component = render(AddButton(context)).getByRole('addButton');
-
-		expect(component).toBeInTheDocument();
-	});
-
-	// TODO: Combine the tests.
-	test('button is disabled, if isEmpty returns true', () => {
-		// TODO: Test isEmpty toHaveBeenCalledWith.
 		jest.spyOn(UserManager, 'isEmpty').mockReturnValue(true);
 
 		const component = render(AddButton(context)).getByRole('addButton');
 
-		expect(component.disabled).toEqual(true);
+		expect(component).toBeInTheDocument();
+		expect(component).toHaveTextContent('Add');
 	});
 
-	// TODO: Combine the tests.
-	test('button is enabled, if isEmpty returns false', () => {
-		jest.spyOn(UserManager, 'isEmpty').mockReturnValue(false);
+	const expectations = [
+		['enabled', true],
+		['disabled', false],
+	];
 
-		const component = render(AddButton(context)).getByRole('addButton');
+	test.each(expectations)('button is %p, if isEmpty returns %p',
+		(dummy, returnValue) => {
+			jest.spyOn(UserManager, 'isEmpty').mockReturnValue(returnValue);
 
-		expect(component.disabled).toEqual(false);
-	});
+			const component = render(AddButton(context)).getByRole('addButton');
+
+			expect(component.disabled).toEqual(returnValue);
+		});
 
 	test('when clicked triggers the action, addUser', () => {
 		jest.spyOn(Remote, 'createUser').mockReturnValue();
+		jest.spyOn(UserManager, 'isEmpty').mockReturnValue(false);
 
 		const component = render(AddButton(context)).getByRole('addButton');
 

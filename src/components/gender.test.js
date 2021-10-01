@@ -28,8 +28,7 @@ describe('Gender', () => {
 
 	test('action.setGender is triggered, when the input value is changed',
 		() => {
-			// TODO: Use gender from above.
-			const value = rndValue(genderOptions);
+			const value = gender;
 
 			const component = render(Gender(context)).getByRole('gender');
 
@@ -40,14 +39,13 @@ describe('Gender', () => {
 		});
 
 	test('Validate whether the genderOptions are passed', () => {
-		// TODO: The mockValue should not be an option.
 		const returnValue = <option role="mock"/>;
 
 		jest.spyOn(genderOptions, 'map').mockReturnValue(returnValue);
 
 		const component = render(Gender(context)).getByRole('mock');
 
-		expect(component).toBeInTheDocument();
 		expect(genderOptions.map).toHaveBeenCalledWith(Option);
+		expect(component).toBeInTheDocument();
 	});
 });
