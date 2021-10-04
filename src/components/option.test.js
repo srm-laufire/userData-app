@@ -1,7 +1,7 @@
 import { render } from '@testing-library/react';
-import Option from './option';
-import config from '../core/config';
 import { rndValue } from '@laufire/utils/random';
+import config from '../core/config';
+import Option from './option';
 
 test('renders the component with appropriate value', () => {
 	const { genderOptions } = config;

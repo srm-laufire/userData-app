@@ -1,9 +1,9 @@
 import { React } from 'react';
-import User from './user';
 import { render } from '@testing-library/react';
-import * as RemoveButton from './removeButton';
 import { getRndString } from '../helpers';
 import { map } from '@laufire/utils/collection';
+import * as RemoveButton from './removeButton';
+import User from './user';
 
 // eslint-disable-next-line max-lines-per-function
 describe('User', () => {

@@ -1,6 +1,6 @@
 import axios from 'axios';
-import config from '../core/config';
 import context from '../core/context';
+import config from '../core/config';
 
 const Remote = {
 	fetchUsers: async () => {

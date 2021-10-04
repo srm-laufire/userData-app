@@ -1,11 +1,11 @@
 import { React, useEffect } from 'react';
 import './App.scss';
-import Gender from './components/gender';
 import context from './core/context';
-import AddButton from './components/addButton';
-import Users from './components/users';
 import Remote from './services/remote';
 import genInput from './components/genInput';
+import Gender from './components/gender';
+import AddButton from './components/addButton';
+import Users from './components/users';
 
 const App = () => {
 	useEffect(Remote.fetchUsers, []);

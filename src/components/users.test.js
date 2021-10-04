@@ -1,7 +1,7 @@
 import { React } from 'react';
 import { render } from '@testing-library/react';
-import Users from './users';
 import User from './user';
+import Users from './users';
 
 describe('Users', () => {
 	const users = [];

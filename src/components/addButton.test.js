@@ -1,7 +1,7 @@
 import { render, fireEvent } from '@testing-library/react';
-import AddButton from './addButton';
-import UserManager from '../services/userManager';
 import Remote from '../services/remote';
+import UserManager from '../services/userManager';
+import AddButton from './addButton';
 
 // eslint-disable-next-line max-lines-per-function
 describe('AddButton', () => {

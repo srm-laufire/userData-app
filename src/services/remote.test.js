@@ -1,6 +1,6 @@
-import Remote from './remote';
-import context from '../core/context';
 import axios from 'axios';
+import context from '../core/context';
+import Remote from './remote';
 import config from '../core/config';
 
 test('fetchUsers', async () => {

@@ -1,6 +1,6 @@
 import { React } from 'react';
-import UserManager from '../services/userManager';
 import Remote from '../services/remote';
+import UserManager from '../services/userManager';
 
 const AddButton = (context) => {
 	const { isEmpty } = UserManager;

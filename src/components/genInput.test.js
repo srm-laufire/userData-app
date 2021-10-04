@@ -2,8 +2,8 @@
 import { getRndString } from '../helpers';
 import { rndBetween } from '@laufire/utils/random';
 import { render, fireEvent } from '@testing-library/react';
-import genInput from './genInput';
 import { secure } from '@laufire/utils/collection';
+import genInput from './genInput';
 
 describe('genInput', () => {
 	const name = getRndString();

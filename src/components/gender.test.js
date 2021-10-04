@@ -1,10 +1,10 @@
+import { React } from 'react';
 import { render, fireEvent } from '@testing-library/react';
-import Gender from './gender';
 import { secure } from '@laufire/utils/collection';
 import { rndValue } from '@laufire/utils/random';
-import { React } from 'react';
 import config from '../core/config';
 import Option from './option';
+import Gender from './gender';
 
 // eslint-disable-next-line max-lines-per-function
 describe('Gender', () => {
