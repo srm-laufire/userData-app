@@ -1,9 +1,7 @@
-import { React } from 'react';
 import { render, fireEvent } from '@testing-library/react';
 import { secure } from '@laufire/utils/collection';
 import { rndValue } from '@laufire/utils/random';
 import config from '../core/config';
-import Option from './option';
 import Gender from './gender';
 
 // eslint-disable-next-line max-lines-per-function
@@ -17,14 +15,27 @@ describe('Gender', () => {
 		actions: {
 			setGender: jest.fn(),
 		},
+		config: {
+			genderOptions,
+		},
 	});
 
-	test('renders the component with appropriate value', () => {
-		const component = render(Gender(context)).getByRole('gender');
+	test('renders the component as expected',
+		() => {
+			const { getByRole, getAllByRole } = render(Gender(context));
+			const genderComponent = getByRole('gender');
+			const options = getAllByRole('option');
+			const values = options.map((option) => option.value);
 
-		expect(component.value).toEqual(gender);
-		expect(component).toBeInTheDocument();
-	});
+			options.forEach((option) => {
+				expect(option).toBeInTheDocument();
+				expect(option).toHaveTextContent(option.value);
+			});
+
+			expect(values).toEqual(genderOptions);
+			expect(genderComponent).toBeInTheDocument();
+			expect(genderComponent.value).toEqual(gender);
+		});
 
 	test('action.setGender is triggered, when the input value is changed',
 		() => {
@@ -37,15 +48,4 @@ describe('Gender', () => {
 			expect(context.actions.setGender)
 				.toHaveBeenCalledWith(value);
 		});
-
-	test('Validate whether the genderOptions are passed', () => {
-		const returnValue = <option role="mock"/>;
-
-		jest.spyOn(genderOptions, 'map').mockReturnValue(returnValue);
-
-		const component = render(Gender(context)).getByRole('mock');
-
-		expect(genderOptions.map).toHaveBeenCalledWith(Option);
-		expect(component).toBeInTheDocument();
-	});
 });

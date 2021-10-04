@@ -1,10 +1,11 @@
 import { React } from 'react';
-import Option from './option';
-import config from '../core/config';
+
+const Option = (gender) =>
+	<option key={ gender } role="option" value={ gender }>{ gender }</option>;
 
 const Gender = (context) => {
 	const { state: { gender }} = context;
-	const { genderOptions } = config;
+	const { config: { genderOptions }} = context;
 
 	return (
 		<select
