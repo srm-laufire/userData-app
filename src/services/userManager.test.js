@@ -1,12 +1,13 @@
 /* eslint-disable max-lines-per-function */
 import UserManager from './userManager';
 import { map } from '@laufire/utils/collection';
+import { getRndString } from '../helpers';
 
 describe('UserManager', () => {
 	const { isEmpty, add, remove } = UserManager;
 
 	const user = {
-		id: 1,
+		id: getRndString(),
 		name: Symbol('name'),
 		age: Symbol('age'),
 		gender: Symbol('gender'),
@@ -60,12 +61,15 @@ describe('UserManager', () => {
 	});
 
 	test('remove function remove the user who have same id', () => {
+		const newUser = {
+			id: getRndString(),
+			name: Symbol('name'),
+			age: Symbol('age'),
+			gender: Symbol('gender'),
+		};
 		const users = [
 			user,
-			{
-				...user,
-				id: 2,
-			},
+			newUser,
 		];
 
 		const context = {
@@ -74,11 +78,10 @@ describe('UserManager', () => {
 			},
 			data: user,
 		};
-
-		const expected = users[1];
+		const expected = [newUser];
 
 		const result = remove(context);
 
-		expect(result).toEqual([expected]);
+		expect(result).toEqual(expected);
 	});
 });

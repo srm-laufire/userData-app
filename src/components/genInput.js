@@ -5,16 +5,12 @@ const actionNames = {
 	age: 'setAge',
 };
 // eslint-disable-next-line react/display-name
-const genInput = (type) => (context) => {
-	const { state } = context;
-
-	return (
-		<input
-			role={ type }
-			value={ state[type] }
-			onChange={ (evt) =>
-				context.actions[actionNames[type]](evt.target.value) }
-		/>);
-};
+const genInput = (type) => ({ state, actions }) =>
+	<input
+		role={ type }
+		value={ state[type] }
+		onChange={ (evt) =>
+			actions[actionNames[type]](evt.target.value) }
+	/>;
 
 export default genInput;

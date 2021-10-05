@@ -2,6 +2,7 @@ import axios from 'axios';
 import context from '../core/context';
 import Remote from './remote';
 import config from '../core/config';
+import { rndBetween } from '@laufire/utils/random';
 
 test('fetchUsers', async () => {
 	const { actions } = context;
@@ -42,7 +43,8 @@ test('createUser', async () => {
 test('removeUser', () => {
 	const { actions } = context;
 	const user = {
-		id: 1,
+		// eslint-disable-next-line no-magic-numbers
+		id: rndBetween(0, 9),
 	};
 	const expectations = [true, false];
 

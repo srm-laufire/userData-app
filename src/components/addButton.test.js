@@ -32,6 +32,7 @@ describe('AddButton', () => {
 			const component = render(AddButton(context)).getByRole('addButton');
 
 			expect(component.disabled).toEqual(returnValue);
+			expect(UserManager.isEmpty).toHaveBeenCalledWith(context);
 		});
 
 	test('when clicked triggers the action, addUser', () => {

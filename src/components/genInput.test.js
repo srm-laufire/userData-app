@@ -10,9 +10,10 @@ describe('genInput', () => {
 	// eslint-disable-next-line no-magic-numbers
 	const age = String(rndBetween(0, 9));
 	const expectations = [
-		['setName', 'name', name],
-		['setAge', 'age', age],
+		['setName', 'name'],
+		['setAge', 'age'],
 	];
+	const mockValues = { name, age };
 	const mockActions = {
 		name: {
 			setName: jest.fn(),
@@ -23,12 +24,10 @@ describe('genInput', () => {
 	};
 
 	test.each(expectations)('renders the component %p with appropriate value',
-		(
-			dummy, type, value
-		) => {
+		(dummy, type) => {
 			const context = secure({
 				state: {
-					[type]: value,
+					[type]: mockValues[type],
 				},
 			});
 
@@ -36,28 +35,26 @@ describe('genInput', () => {
 			const component = render(Input(context)).getByRole(type);
 
 			expect(component).toBeInTheDocument();
-			expect(component.value).toEqual(value);
+			expect(component.value).toEqual(mockValues[type]);
 		});
 
 	test.each(expectations)('required action for %p is triggered,'
 		+ 'when the input value is changed',
-	(
-		action, param, paramValue
-	) => {
+	(actionName, type) => {
 		const value = getRndString();
 		const context = secure({
 			state: {
-				[param]: paramValue,
+				[type]: mockValues[type],
 			},
-			actions: mockActions[param],
+			actions: mockActions[type],
 		});
 
-		const Result = genInput(param);
-		const component = render(Result(context)).getByRole(param);
+		const Result = genInput(type);
+		const component = render(Result(context)).getByRole(type);
 
 		fireEvent.change(component, { target: { value }});
 
-		expect(context.actions[action])
+		expect(context.actions[actionName])
 			.toHaveBeenCalledWith(value);
 	});
 });
