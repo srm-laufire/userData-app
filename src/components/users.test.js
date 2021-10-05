@@ -1,14 +1,15 @@
 import { React } from 'react';
 import { render } from '@testing-library/react';
-import User from './user';
 import Users from './users';
 
+// eslint-disable-next-line max-lines-per-function
 describe('Users', () => {
 	const users = [];
 	const context = {
 		state: {
 			users,
 		},
+		data: Symbol('user'),
 	};
 
 	test('returns a appropriate component', () => {
@@ -25,6 +26,5 @@ describe('Users', () => {
 		const component = render(Users(context)).getByRole('mock');
 
 		expect(component).toBeInTheDocument();
-		expect(users.map).toHaveBeenCalledWith(User);
 	});
 });

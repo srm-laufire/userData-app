@@ -5,9 +5,13 @@ import RemoveButton from './removeButton';
 
 describe('RemoveButton', () => {
 	const user = Symbol('user');
+	const context = {
+		data: user,
+	};
 
 	test('renders the appropriate component', () => {
-		const component = render(RemoveButton(user)).getByRole('removeButton');
+		const component = render(RemoveButton(context))
+			.getByRole('removeButton');
 
 		expect(component).toBeInTheDocument();
 		expect(component).toHaveTextContent('X');
@@ -16,11 +20,11 @@ describe('RemoveButton', () => {
 	test('when clicked triggers the action, removeUser', () => {
 		jest.spyOn(Remote, 'removeUser').mockReturnValue();
 
-		const component = render(RemoveButton(user))
+		const component = render(RemoveButton(context))
 			.getByRole('removeButton');
 
 		fireEvent.click(component);
 
-		expect(Remote.removeUser).toHaveBeenCalledWith(user);
+		expect(Remote.removeUser).toHaveBeenCalledWith(context);
 	});
 });

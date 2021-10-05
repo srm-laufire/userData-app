@@ -12,20 +12,23 @@ describe('User', () => {
 		age: getRndString(),
 		gender: getRndString(),
 	};
+	const context = {
+		data: user,
+	};
 
 	test('renders the appropriate component', () => {
 		const removeButton = jest.spyOn(RemoveButton, 'default')
 			.mockReturnValue(<span role="removeButton"/>);
 
-		const { getByRole } = render(User(user));
+		const { getByRole } = render(User(context));
 
 		expect(getByRole('user')).toBeInTheDocument();
-		expect(removeButton).toHaveBeenCalledWith(user);
+		expect(removeButton).toHaveBeenCalledWith(context);
 	});
 
 	test('renders the children with appropriate class',
 		() => {
-			const { getByRole } = render(User(user));
+			const { getByRole } = render(User(context));
 
 			map(user, (value, key) => {
 				expect(getByRole(key)).toHaveClass(key);

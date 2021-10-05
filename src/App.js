@@ -8,7 +8,7 @@ import AddButton from './components/addButton';
 import Users from './components/users';
 
 const App = () => {
-	useEffect(Remote.fetchUsers, []);
+	useEffect(() => Remote.fetchUsers(context), []);
 
 	return <div className="App" role="App">
 		Name { genInput('name')(context) }

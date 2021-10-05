@@ -1,16 +1,14 @@
 import axios from 'axios';
-import context from '../core/context';
-import config from '../core/config';
 
 const Remote = {
-	fetchUsers: async () => {
+	fetchUsers: async ({ config, actions }) => {
 		const results = await axios.get(config.localHostURL);
 
-		context.actions.setUsers(results.data);
+		actions.setUsers(results.data);
 	},
 
-	createUser: async ({ state: { name, age, gender }}) => {
-		context.actions
+	createUser: async ({ config, state: { name, age, gender }, actions }) => {
+		actions
 			.addUser((await axios.post(config.localHostURL, {
 				name,
 				age,
@@ -18,10 +16,10 @@ const Remote = {
 			})).data);
 	},
 
-	removeUser: async (user) => {
-		const result = await axios.delete(`${ config.localHostURL }${ user.id }`);
+	removeUser: async ({ config, data, actions }) => {
+		const result = await axios.delete(`${ config.localHostURL }${ data.id }`);
 
-		result && context.actions.removeUser(user);
+		result && actions.removeUser(data);
 	},
 };
 

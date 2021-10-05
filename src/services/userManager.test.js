@@ -1,6 +1,7 @@
 /* eslint-disable max-lines-per-function */
 import UserManager from './userManager';
-import { map } from '@laufire/utils/collection';
+import { map, values } from '@laufire/utils/collection';
+import { rndValue } from '@laufire/utils/random';
 import { getRndString } from '../helpers';
 
 describe('UserManager', () => {
@@ -13,47 +14,29 @@ describe('UserManager', () => {
 		gender: Symbol('gender'),
 	};
 
-	describe('isEmpty', () => {
-		const generateTest = ({ name, age, expected }) => {
-			const context = {
-				state: {
-					name,
-					age,
-				},
-			};
+	test('isEmpty', () => {
+		const input = { name: Symbol('name'),
+			age: Symbol('age') };
+		const object = map(input, (value) => rndValue(['', value]));
 
-			const result = isEmpty(context);
+		const context = { state: object };
 
-			expect(result).toEqual(expected);
-		};
+		const result = isEmpty(context);
 
-		const combinations = {
-			someEmpty: {
-				name: '',
-				age: Symbol('age'),
-				expected: true,
-			},
-
-			allFull: {
-				name: Symbol('name'),
-				age: Symbol('age'),
-				expected: false,
-			},
-		};
-
-		map(combinations, (params, action) =>
-			test(action, () => generateTest(params)));
+		expect(result).toEqual(values(object).includes(''));
 	});
 
 	test('add function concat the user in users', () => {
+		const users = [];
 		const context = {
 			state: {
-				users: [user],
+				users,
 			},
-			data: user,
+			data: Symbol('user'),
 		};
+		const expected = Symbol('users');
 
-		const expected = [user, user];
+		jest.spyOn(users, 'concat').mockReturnValue(expected);
 
 		const result = add(context);
 
